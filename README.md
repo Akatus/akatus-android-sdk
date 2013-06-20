@@ -91,11 +91,11 @@ public class MainActivity extends Activity implements AkatusReaderInterface{
 
 #### Métodos 'callback' da interface AkatusReaderInterface:
 
-⁃ void handleAutoCfgStatus(int status, String percent): Utilizado para receber o andamento da autoconfiguração do leitor, sendo que, se esse processo não for concluído com sucesso, a aplicação não estará possibilitada de se conectar ao leitor.
+⁃ **void handleAutoCfgStatus(int status, String percent)**: Utilizado para receber o andamento da autoconfiguração do leitor, sendo que, se esse processo não for concluído com sucesso, a aplicação não estará possibilitada de se conectar ao leitor.
 
 As constantes definidas pela classe AkatusReaderListener para este método são descritas da seguinte forma:
 
-**AUTO_CFG_STARTED:** Retornada quando a autoconfiguração é iniciada, através do método **startConfig()** da classe **AkatusReaderListener**, que será descrito mais adiante;
+```java AUTO_CFG_STARTED```:** Retornada quando a autoconfiguração é iniciada, através do método **startConfig()** da classe **AkatusReaderListener**, que será descrito mais adiante;
 
 **AUTO_CFG_PROGRESS:** Retornada conforme novos **perfis de configuração** estão sendo utilizados para tentativa de configuração. É retornada também uma String contendo a porcentagem de perfis já utilizados;
 
@@ -106,7 +106,7 @@ As constantes definidas pela classe AkatusReaderListener para este método são 
 Obs.: Caso a 1ª tentativa tenha este retorno, não considere que o dispositivo é incompatível com o leitor, pois já foi observado que, em alguns casos, uma nova tentativa de configuração (Liberando memória no aparelho) obteve sucesso.
 
 
-- void handleReaderStatus(int status) : Utilizado para receber os estágios de conexão do dispositivo com o leitor de cartões. É retornado à partir da chamada ao método connectWithProfile() que será descrito posteriormente.
+- **void handleReaderStatus(int status)** : Utilizado para receber os estágios de conexão do dispositivo com o leitor de cartões. É retornado à partir da chamada ao método connectWithProfile() que será descrito posteriormente.
 
 As constantes definidas pela classe AkatusReaderListener para este método são descritas da seguinte forma:
 
