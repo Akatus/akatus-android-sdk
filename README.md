@@ -124,10 +124,10 @@ Obs.: Pode ser que a leitura não retorne os bytes corretamente, sendo assim, é
 
 ```java
 try {
-	String dataString = new String(data);
-	String cardNo = dataString.substring(dataString.indexOf(";")+1, 	dataString.indexOf("="));
-	// A varíavel cardNo agora representa o numero do cartão mascarado com '*'
+    String dataString = new String(data);
+    String cardNo = dataString.substring(dataString.indexOf(";")+1, dataString.indexOf("="));
+    // A varíavel cardNo agora representa o numero do cartão mascarado com '*'
 } catch (IndexOutOfBoundsException e) {
-	// Os dados não foram lidos corretamente, passe o cartão novamente
+    // Os dados não foram lidos corretamente, passe o cartão novamente
 }
 ```
