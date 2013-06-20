@@ -5,9 +5,9 @@
 
 #Akatus Mobile Android SDK
 
-### Como integrar o Akatus Mobile em seu aplicativo Android
+## Como integrar o Akatus Mobile em seu aplicativo Android
 
-I - Integrando o Leitor de Cartões:
+### I - Integrando o Leitor de Cartões:
 
 Para que seu aplicativo esteja apto à receber informações vindas do Leitor de Cartões Akatus, os seguintes passos serão necessários:
 
@@ -89,7 +89,7 @@ public class MainActivity extends Activity implements AkatusReaderInterface{
 }
 ```
 
-### Métodos 'callback' da interface AkatusReaderInterface:
+#### Métodos 'callback' da interface AkatusReaderInterface:
 
 ⁃ void handleAutoCfgStatus(int status, String percent): Utilizado para receber o andamento da autoconfiguração do leitor, sendo que, se esse processo não for concluído com sucesso, a aplicação não estará possibilitada de se conectar ao leitor.
 
@@ -133,7 +133,7 @@ try {
 ```
 
 
-### Métodos da classe AkatusReaderListener:
+#### Métodos da classe AkatusReaderListener:
 
 **void startConfig():** Utilizado para iniciar a autoconfiguração do leitor. A aplicação deve estar conectada à internet, caso contrário, não poderá se comunicar com o servidor da Akatus para saber qual configuração utilizar.
 
@@ -151,3 +151,43 @@ try {
 
 **void finalizeReader():** Encerra todos os processos relacionados ao leitor (banco de dados, perfis, evento de leitura). Deve ser chamado ao deixar a Activity (onDestroy).
 
+
+### II – Enviando Transações para a o servidor Akatus:
+
+Para começar a enviar transações para o servidor Akatus, são necessários os seguintes passos:
+
+	⁃	Adicione gson-2.1.jar e httpmime-4.1.3.jar (ou equivalentes) ao seu projeto;
+	⁃	Instancie um objeto 'TransactionRequest';
+	⁃	Preencha os dados da transação
+	⁃	Instancie um objeto **AkatusTransactionTemplate** e envie pelo método **postTransaction**, conforme o exemplo:
+
+```java
+private void sendAkatusTransaction(){
+    TransactionRequest request = new TransactionRequest();
+
+    request.setAmount("100.0”);
+    request.setCard_number("1234567891234567");
+    request.setCvv("123");
+    request.setDescription("ITEM1");
+    request.setExpiration("201309"); // yyyyMM
+    request.setGeolocation(new double[]{1234,1234}); // lat, longt
+    request.setHolder_name("CLIENT");
+    request.setInstallments("10"); // min: 1, max: 12
+    request.setPhoto(photoByteArray);
+    request.setSignature(signatureByteArray);
+    request.setToken(authResponse.getToken());
+    request.setTrack1(cardDataByteArray);
+
+    try {
+        AkatusTransactionTemplate transaction = new AkatusTransactionTemplate(true);
+        TransactionResponse response = transaction.postTransaction(request);
+
+        if(response.getReturn_code() == AkatusTransactionTemplate.TRANSACTION_OK)
+            Toast.makeText(this, "Transaction accepted! " + response.getMessage(), Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "Transaction recused! " + response.getMessage(), Toast.LENGTH_SHORT).show();
+    } catch (Exception e) {
+        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+    }
+}
+```
