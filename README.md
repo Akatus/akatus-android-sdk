@@ -95,13 +95,13 @@ public class MainActivity extends Activity implements AkatusReaderInterface{
 
 As constantes definidas pela classe AkatusReaderListener para este método são descritas da seguinte forma:
 
-```java AUTO_CFG_STARTED```:** Retornada quando a autoconfiguração é iniciada, através do método **startConfig()** da classe **AkatusReaderListener**, que será descrito mais adiante;
+__AUTO_CFG_STARTED__: Retornada quando a autoconfiguração é iniciada, através do método **startConfig()** da classe **AkatusReaderListener**, que será descrito mais adiante;
 
-**AUTO_CFG_PROGRESS:** Retornada conforme novos **perfis de configuração** estão sendo utilizados para tentativa de configuração. É retornada também uma String contendo a porcentagem de perfis já utilizados;
+__AUTO_CFG_PROGRESS__: Retornada conforme novos **perfis de configuração** estão sendo utilizados para tentativa de configuração. É retornada também uma String contendo a porcentagem de perfis já utilizados;
 
-**AUTO_CFG_FINISHED:** Retornada quando um perfil válido for encontrado no XML de configuração da Akatus, e uma chamada ao método **connectWithProfile()** da classe **AkatusReaderListener** será chamada implicitamente;
+__AUTO_CFG_FINISHED__: Retornada quando um perfil válido for encontrado no XML de configuração da Akatus, e uma chamada ao método **connectWithProfile()** da classe **AkatusReaderListener** será chamada implicitamente;
 
-**AUTO_CFG_FAILED:** Retornada quando todos os perfis já foram utilizados e nenhum deles possibilitou a comunicação do dispositivo com o leitor.
+__AUTO_CFG_FAILED__: Retornada quando todos os perfis já foram utilizados e nenhum deles possibilitou a comunicação do dispositivo com o leitor.
 
 Obs.: Caso a 1ª tentativa tenha este retorno, não considere que o dispositivo é incompatível com o leitor, pois já foi observado que, em alguns casos, uma nova tentativa de configuração (Liberando memória no aparelho) obteve sucesso.
 
@@ -110,15 +110,15 @@ Obs.: Caso a 1ª tentativa tenha este retorno, não considere que o dispositivo 
 
 As constantes definidas pela classe AkatusReaderListener para este método são descritas da seguinte forma:
 
-**READER_DISCONNECTED:** O leitor está desconectado ou a autoconfiguração ainda não foi concluída com sucesso;
+__READER_DISCONNECTED__: O leitor está desconectado ou a autoconfiguração ainda não foi concluída com sucesso;
 
-**READER_CONNECTING:** O leitor foi conectado ao dispositivo e está em processo de reconhecimento. Ainda não é possível obter resultados de leitura;
+__READER_CONNECTING__: O leitor foi conectado ao dispositivo e está em processo de reconhecimento. Ainda não é possível obter resultados de leitura;
 
-**READER_CONNECTED:** O leitor está conectado e o dispositivo está preparado para enviar comandos como **startCardReading()** e **stopCardReading()**;
+__READER_CONNECTED__: O leitor está conectado e o dispositivo está preparado para enviar comandos como **startCardReading()** e **stopCardReading()**;
 
-**READER_CONNECTED_NO_PROFILE:** O leitor está conectado, porém não foi utlizado um **perfil de configuração** como os outros. Um perfil especial foi encontrado, e para este tipo de dispositivo deve-se chamar o método **startConfig()** todas as vezes que quiser conectar-se ao leitor. É importante que sua aplicação armazene essa informação para futuras conexões.
+__READER_CONNECTED_NO_PROFILE__: O leitor está conectado, porém não foi utlizado um **perfil de configuração** como os outros. Um perfil especial foi encontrado, e para este tipo de dispositivo deve-se chamar o método **startConfig()** todas as vezes que quiser conectar-se ao leitor. É importante que sua aplicação armazene essa informação para futuras conexões.
 
-**void handleCardSwiped(byte[] data):** Utilizado para receber os dados criptografados lidos do cartão. É retornado quando o cartão passar pelo leitor, após a chamada do método **startCardReading()** da classe **AkatusReaderListener**.
+**void handleCardSwiped(byte[] data)**: Utilizado para receber os dados criptografados lidos do cartão. É retornado quando o cartão passar pelo leitor, após a chamada do método **startCardReading()** da classe **AkatusReaderListener**.
 
 Obs.: Pode ser que a leitura não retorne os bytes corretamente, sendo assim, é recomendado utilizar a seguinte validação antes de enviar o array de bytes para o servidor da Akatus:
 
