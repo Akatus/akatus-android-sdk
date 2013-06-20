@@ -139,14 +139,15 @@ try {
 
 **void stopConfig():** Utilizado para interromper o processo de autoconfiguração, caso o usuário nao deseje esperar no momento. Obs.: Ao utilizar este método, a próxima chamada à  startConfig() iniciará as tentativas à partir do último perfil utilizado, evitando que retorne à '0%' ;
 
-**boolean isConfigured():** Utilizado para saber se já existe um perfil de configuração salvo no banco de dados. Dispositivos que se conectam sem perfil (CONNECTED_NO_PROFILE) sempre retornarão 'false';
+**boolean isConfigured():** Utilizado para saber se já existe um perfil de configuração salvo no banco de dados. Dispositivos que se conectam sem perfil (**CONNECTED_NO_PROFILE**) sempre retornarão **false**;
 
-**void connectWithProfile():** Utilizado para conectar o dispositivo ao leitor usando um perfil de configuração salvo anteriormente. Terá efeito apenas se o método isConfigured() retornar 'true';
+**void connectWithProfile():** Utilizado para conectar o dispositivo ao leitor usando um perfil de configuração salvo anteriormente. Terá efeito apenas se o método **isConfigured()** retornar **true**;
 
-**void registerReader(boolean listen):** Utilizado para informar ao Listener se a Activity deve ou não ser informada com as atualizações de status do leitor. Exemplo: Activity A criou uma instância AkatusReaderListener(this, this), e quando Activity A perder o foco, deve chamar esse método com o valor 'false', para que possíveis eventos de atualização não sejam iniciados para ela, causando erros de UI;
+**void registerReader(boolean listen):** Utilizado para informar ao Listener se a Activity deve ou não ser informada com as atualizações de status do leitor. Exemplo: Activity A criou uma instância **AkatusReaderListener(this, this)**, e quando Activity A perder o foco, deve chamar esse método com o valor **false**, para que possíveis eventos de atualização não sejam iniciados para ela, causando erros de UI;
 
-**void startCardReading():** Utilizado para informar ao leitor que deve iniciar o processo de leitura de cartões. Somente surtirá efeito após o método handleReaderStatus retornar CONNECTED ou CONNECTED_NO_PROFILE. Obs.: Este método deve ser chamado 1 vez para cada evento de leitura (retorno pelo 'callback' handleCardSwiped);
+**void startCardReading():** Utilizado para informar ao leitor que deve iniciar o processo de leitura de cartões. Somente surtirá efeito após o método **handleReaderStatus** retornar **CONNECTED** ou **CONNECTED_NO_PROFILE**. Obs.: Este método deve ser chamado 1 vez para cada evento de leitura (retorno pelo **callback** handleCardSwiped);
 
-**void stopCardReading():** Utilizado para informar ao leitor que não deve mais esperar pela leitura de cartões, geralmente chamado ao deixar a Acticity, seguido por 'finalizeReader()';
+**void stopCardReading():** Utilizado para informar ao leitor que não deve mais esperar pela leitura de cartões, geralmente chamado ao deixar a Acticity, seguido por **finalizeReader()**;
 
 **void finalizeReader():** Encerra todos os processos relacionados ao leitor (banco de dados, perfis, evento de leitura). Deve ser chamado ao deixar a Activity (onDestroy).
+
