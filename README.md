@@ -139,7 +139,7 @@ try {
 
 **void stopConfig():** Utilizado para interromper o processo de autoconfiguração, caso o usuário nao deseje esperar no momento. Obs.: Ao utilizar este método, a próxima chamada à  startConfig() iniciará as tentativas à partir do último perfil utilizado, evitando que retorne à '0%' ;
 
-**boolean isConfigured():** Utilizado para saber se já existe um perfil de configuração salvo no banco de dados. Dispositivos que se conectam sem perfil (**CONNECTED_NO_PROFILE**) sempre retornarão **false**;
+**boolean isConfigured():** Utilizado para saber se já existe um perfil de configuração salvo no banco de dados. Dispositivos que se conectam sem perfil **CONNECTED_NO_PROFILE** sempre retornarão **false**;
 
 **void connectWithProfile():** Utilizado para conectar o dispositivo ao leitor usando um perfil de configuração salvo anteriormente. Terá efeito apenas se o método **isConfigured()** retornar **true**;
 
