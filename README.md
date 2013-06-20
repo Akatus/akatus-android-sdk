@@ -165,7 +165,7 @@ Para começar a enviar transações para o servidor Akatus, são necessários os
 private void sendAkatusTransaction(){
     TransactionRequest request = new TransactionRequest();
 
-    request.setAmount("100.0”);
+    request.setAmount("100.0");
     request.setCard_number("1234567891234567");
     request.setCvv("123");
     request.setDescription("ITEM1");
