@@ -48,7 +48,6 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 		btnLogin.setOnClickListener(this);		
 		btnSend.setOnClickListener(this);		
 		
-		fillTransaction();
 	}
 	AkatusReaderListener reader;
 	@Override
@@ -69,7 +68,12 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 				AuthRequest req = new AuthRequest(email,senha,null,null);
 				
 				user = new AkatusAuthTemplate(true).login(req);
-				transaction.setToken(user.getToken());
+				if(user != null && user.getReturn_code() == 0 && user.getToken() != null && user.getToken().trim().length() > 0){
+					fillTransaction();
+					transaction.setToken(user.getToken());
+				}else{
+					Toast.makeText(this, "Login e/ou senha inválidos", Toast.LENGTH_SHORT).show();
+				}
 				((TextView)findViewById(R.id.lblTransacao)).setText("Transaction: "+transaction.toString());
 			} catch (Exception e) {
 				Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
@@ -168,7 +172,7 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 			String email = ((EditText)findViewById(R.id.txt_login)).getText().toString();
 			String apiKey = user.getApi_key();
 			double value = Double.parseDouble(transaction.getAmount());			
-			InstallmentsResponse.ParcelaInfo[] resp = new AkatusInstallmentTemplate().getInstallmentsList(email, apiKey, value);
+			InstallmentsResponse.ParcelaInfo[] resp = new AkatusInstallmentTemplate(true).getInstallmentsList(email, apiKey, value);
 			transaction.setInstallments(resp[0].getQuantidade()+"");
 
 			InputStream sig_is = getResources().openRawResource(R.raw.assinatura);
@@ -196,7 +200,10 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 	
 	private void sendAkatusTransaction(){
 		try {	
-				
+			if(transaction == null){
+				Toast.makeText(this, "Efetue o login", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			AkatusTransactionTemplate ws = new AkatusTransactionTemplate(true);
 			TransactionResponse response = ws.postTransaction(transaction);
 			
