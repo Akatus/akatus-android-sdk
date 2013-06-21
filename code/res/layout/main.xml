@@ -9,38 +9,58 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
-        
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="AKATUS LIBRARY" 
-            android:textSize="20sp"/>
+            android:text="AKATUS LIBRARY"
+            android:textSize="20sp" />
 
-        <EditText 
+        <EditText
+            android:id="@+id/txt_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Login"
-            android:id="@+id/txt_login"/>
+            android:hint="Login" />
 
-        <EditText 
+        <EditText
+            android:id="@+id/txt_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Senha"
-            android:id="@+id/txt_password"
-            android:inputType="textPassword"/>     
-            
-        <Button 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:id="@+id/btn_login"/>
+            android:inputType="textPassword" />
 
-        <View 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login" />
+
+            <Button
+                android:id="@+id/btn_logoff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logoff" 
+                android:visibility="invisible"/>
+
+            <Button
+                android:id="@+id/btn_installments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Installments" 
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <View
             android:layout_width="fill_parent"
             android:layout_height="2sp"
-            android:background="@android:color/black"/>
-        
+            android:background="@android:color/black" />
+
         <TextView
             android:id="@+id/lbl_config_status"
             android:layout_width="fill_parent"
@@ -66,30 +86,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Swipe" />
-        
-        <View 
+
+        <View
             android:layout_width="fill_parent"
             android:layout_height="2sp"
-            android:background="@android:color/black"/>
-        
-        
+            android:background="@android:color/black" />
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="TRANSACTION"
-            android:textSize="18sp" 
-            android:gravity="center"/>
-        
-        <TextView 
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lblTransacao"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="TRANSACTION"
-            android:id="@+id/lblTransacao"/>
-        <Button 
+            android:text="TRANSACTION" />
+
+        <Button
+            android:id="@+id/bt_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bt_send"
-            android:text="Enviar"/>
+            android:text="Enviar" />
     </LinearLayout>
 
 </ScrollView>

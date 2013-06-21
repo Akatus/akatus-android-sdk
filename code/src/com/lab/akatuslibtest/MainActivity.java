@@ -10,6 +10,7 @@ import com.lib.akatusmobile.AkatusTransactionTemplate;
 import com.lib.akatusmobile.AuthRequest;
 import com.lib.akatusmobile.AuthResponse;
 import com.lib.akatusmobile.InstallmentsResponse;
+import com.lib.akatusmobile.InstallmentsResponse.ParcelaInfo;
 import com.lib.akatusmobile.Payer;
 import com.lib.akatusmobile.TransactionInvalidException;
 import com.lib.akatusmobile.TransactionRequest;
@@ -27,7 +28,7 @@ import android.app.Activity;
 public class MainActivity extends Activity implements AkatusReaderInterface, OnClickListener{
 	
 	private TextView txtReaderStatus, txtConfig;
-	private Button btnConfig, btnSwipe, btnLogin, btnSend;
+	private Button btnConfig, btnSwipe, btnLogin, btnSend, btLogoff, btInstallments;
 	private TransactionRequest transaction;
 	private AuthResponse user;
 	
@@ -42,16 +43,21 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 		btnSwipe = (Button) findViewById(R.id.btn_swipe);
 		btnLogin = (Button) findViewById(R.id.btn_login);
 		btnSend = (Button) findViewById(R.id.bt_send);
+		btLogoff = (Button) findViewById(R.id.btn_logoff);
+		btInstallments = (Button) findViewById(R.id.btn_installments);
 		
 		btnConfig.setOnClickListener(this);
 		btnSwipe.setOnClickListener(this);		
 		btnLogin.setOnClickListener(this);		
 		btnSend.setOnClickListener(this);		
+		btLogoff.setOnClickListener(this);
+		btInstallments.setOnClickListener(this);
 		
 	}
 	AkatusReaderListener reader;
 	@Override
 	public void onClick(View v) {
+		try{
 		if( v == btnConfig){
 			reader = new AkatusReaderListener(this, this);
 			if(!reader.isConfigured())
@@ -80,6 +86,23 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 			}
 		}else if(v == btnSend){
 			sendAkatusTransaction();
+		}else if(v == btLogoff){
+			user = null;
+			((EditText)findViewById(R.id.txt_login)).setText("");
+			((EditText)findViewById(R.id.txt_password)).setText("");
+			((TextView)findViewById(R.id.lblTransacao)).setText("");
+			btLogoff.setVisibility(Button.INVISIBLE);
+			btInstallments.setVisibility(Button.INVISIBLE);
+		}else if(v == btInstallments){
+			String email = ((EditText)findViewById(R.id.txt_login)).getText().toString();
+			String apiKey = user.getApi_key();
+			double value = Double.parseDouble(transaction.getAmount());			
+
+			ParcelaInfo[] resp = new AkatusInstallmentTemplate(true).getInstallmentsList(email, apiKey, value);
+			
+		}
+		}catch(Exception e){
+			
 		}
 	}
 
