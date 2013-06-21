@@ -25,6 +25,7 @@ Para que seu aplicativo esteja apto à receber informações vindas do Leitor de
 - Adicione o arquivo **akatus_reader.xml** na pasta **assets** do seu projeto;
 - Tenha uma Activity que implemente a interface **AkatusReaderInterface** e seus 3 métodos: <pre>handleAutoCfgStatus, handleReaderStatus e handleCardSwiped</pre>
 - Instancie um objeto **AkatusReaderListener**;
+- Esteja conectado à Internet
 - Inicie a **autoconfiguração** do leitor e aguarde até que o status **Conectado** seja retornado.
 
 Exemplos:
