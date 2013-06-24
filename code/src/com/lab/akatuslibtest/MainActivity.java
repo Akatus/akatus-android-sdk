@@ -9,7 +9,6 @@ import com.lib.akatusmobile.AkatusReaderListener;
 import com.lib.akatusmobile.AkatusTransactionTemplate;
 import com.lib.akatusmobile.AuthRequest;
 import com.lib.akatusmobile.AuthResponse;
-import com.lib.akatusmobile.InstallmentsResponse;
 import com.lib.akatusmobile.InstallmentsResponse.ParcelaInfo;
 import com.lib.akatusmobile.Payer;
 import com.lib.akatusmobile.TransactionInvalidException;
@@ -24,27 +23,34 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 public class MainActivity extends Activity implements AkatusReaderInterface, OnClickListener{
 	
-	private TextView txtReaderStatus, txtConfig;
+	private EditText txtLogin, txtPassword;
+	private TextView lblReaderStatus, lblConfig, lblTransaction;
 	private Button btnConfig, btnSwipe, btnLogin, btnSend, btLogoff, btInstallments;
 	private TransactionRequest transaction;
 	private AuthResponse user;
-	
+	private AkatusReaderListener reader;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		txtReaderStatus = (TextView)findViewById(R.id.lbl_reader_status);
-		txtConfig = (TextView)findViewById(R.id.lbl_config_status);
+		lblReaderStatus = (TextView)findViewById(R.id.lbl_reader_status);
+		lblConfig = (TextView)findViewById(R.id.lbl_config_status);
+		lblTransaction = (TextView)findViewById(R.id.lblTransacao);
 		btnConfig = (Button) findViewById(R.id.btn_config);
 		btnSwipe = (Button) findViewById(R.id.btn_swipe);
 		btnLogin = (Button) findViewById(R.id.btn_login);
 		btnSend = (Button) findViewById(R.id.bt_send);
 		btLogoff = (Button) findViewById(R.id.btn_logoff);
 		btInstallments = (Button) findViewById(R.id.btn_installments);
+		txtLogin = (EditText)findViewById(R.id.txt_login);
+		txtPassword = (EditText)findViewById(R.id.txt_password);
 		
 		btnConfig.setOnClickListener(this);
 		btnSwipe.setOnClickListener(this);		
@@ -54,55 +60,49 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 		btInstallments.setOnClickListener(this);
 		
 	}
-	AkatusReaderListener reader;
+
 	@Override
 	public void onClick(View v) {
 		try{
-		if( v == btnConfig){
-			reader = new AkatusReaderListener(this, this);
-			if(!reader.isConfigured())
-				reader.startConfig();
-			else
-				reader.connectWithProfile();
-		}else if(v== btnSwipe){
-			reader.startCardReading();
-		}else if(v == btnLogin){
-			try {
-				String email = ((EditText)findViewById(R.id.txt_login)).getText().toString();
-				String senha = ((EditText)findViewById(R.id.txt_password)).getText().toString();
+			if( v == btnConfig){
+				reader = new AkatusReaderListener(this, this);
+				if(!reader.isConfigured())
+					reader.startConfig();
+				else
+					reader.connectWithProfile();
+			}else if(v== btnSwipe){
+				if(reader != null)
+					reader.startCardReading();
+			}else if(v == btnLogin){
+				String email = txtLogin.getText().toString();
+				String senha = txtPassword.getText().toString();
 				
-				AuthRequest req = new AuthRequest(email,senha,null,null);
+				AuthRequest req = new AuthRequest(email,senha,null,new double[]{1234,1234});
 				
 				user = new AkatusAuthTemplate(true).login(req);
 				if(user != null && user.getReturn_code() == 0 && user.getToken() != null && user.getToken().trim().length() > 0){
 					fillTransaction();
 					transaction.setToken(user.getToken());
+					lblTransaction.setText("Transaction: "+transaction.toString());
+					btLogoff.setVisibility(Button.VISIBLE);
+					btInstallments.setVisibility(Button.VISIBLE);
 				}else{
-					Toast.makeText(this, "Login e/ou senha inválidos", Toast.LENGTH_SHORT).show();
+					showToast("Login e/ou senha inválidos");
 				}
-				((TextView)findViewById(R.id.lblTransacao)).setText("Transaction: "+transaction.toString());
-			} catch (Exception e) {
-				Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+			}else if(v == btnSend){
+				sendAkatusTransaction();
+			}else if(v == btLogoff){
+				user = null;
+				txtLogin.setText("");
+				txtPassword.setText("");
+				lblTransaction.setText("");
+				btLogoff.setVisibility(Button.INVISIBLE);
+				btInstallments.setVisibility(Button.INVISIBLE);
+			}else if(v == btInstallments){
+				showInstallmentsDialog();
 			}
-		}else if(v == btnSend){
-			sendAkatusTransaction();
-		}else if(v == btLogoff){
-			user = null;
-			((EditText)findViewById(R.id.txt_login)).setText("");
-			((EditText)findViewById(R.id.txt_password)).setText("");
-			((TextView)findViewById(R.id.lblTransacao)).setText("");
-			btLogoff.setVisibility(Button.INVISIBLE);
-			btInstallments.setVisibility(Button.INVISIBLE);
-		}else if(v == btInstallments){
-			String email = ((EditText)findViewById(R.id.txt_login)).getText().toString();
-			String apiKey = user.getApi_key();
-			double value = Double.parseDouble(transaction.getAmount());			
-
-			ParcelaInfo[] resp = new AkatusInstallmentTemplate(true).getInstallmentsList(email, apiKey, value);
-			
-		}
 		}catch(Exception e){
-			
+			showToast(e.toString());
 		}
 	}
 
@@ -115,19 +115,19 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 				switch (status) {
 				case AkatusReaderListener.AUTO_CFG_STARTED:
 					// Show a progress dialog: "Configuring reader..."
-					txtConfig.setText("Auto Config Started");
+					lblConfig.setText("Auto Config Started");
 					break;
 				case AkatusReaderListener.AUTO_CFG_PROGRESS:
 					// Change the progress message using "percent" parameter
-					txtConfig.setText("Auto Config Progress: "+percent);
+					lblConfig.setText("Auto Config Progress: "+percent);
 					break;
 				case AkatusReaderListener.AUTO_CFG_FINISHED:
 					// Dismiss the progress and wait for handleReaderStatus() method
-					txtConfig.setText("Auto Config Sucess!");
+					lblConfig.setText("Auto Config Sucess!");
 					break;
 				case AkatusReaderListener.AUTO_CFG_FAILED:
 					// Ask the user if should run auto-config again
-					txtConfig.setText("Auto Config Failed!");
+					lblConfig.setText("Auto Config Failed!");
 					break;
 				}
 			}
@@ -141,8 +141,19 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 			
 			@Override
 			public void run() {
-				txtReaderStatus.setText(data.toString());
-			//	sendAkatusTransaction(data);
+				try {
+				    String dataString = new String(data);
+				    String cardNo = dataString.substring(dataString.indexOf(";")+1, dataString.indexOf("="));
+				    // A varíavel cardNo agora representa o numero do cartão mascarado com '*'
+
+				    lblReaderStatus.setText(cardNo);
+				    if(transaction != null)
+				    	transaction.setTrack1(dataString);
+
+				} catch (IndexOutOfBoundsException e) {
+				    // Os dados não foram lidos corretamente, passe o cartão novamente
+					showToast("Passe o cartão novamente");
+				}
 			}
 		});
 	}
@@ -157,19 +168,19 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 		switch (status) {
 		case AkatusReaderListener.READER_CONNECTING:
 			// Alert the user to wait to pass a card
-			txtReaderStatus.setText("CONNECTING");
+			lblReaderStatus.setText("CONNECTING");
 			break;
 		case AkatusReaderListener.READER_CONNECTED_NO_PROFILE:
 			// Store this in your app and use reader.startConfig() futurelly for listen the reader 
-			txtReaderStatus.setText("CONNECTED");
+			lblReaderStatus.setText("CONNECTED");
 			break;
 		case AkatusReaderListener.READER_CONNECTED:
 			// A good place to call reader.startCardReading() method			
-			txtReaderStatus.setText("CONNECTED");
+			lblReaderStatus.setText("CONNECTED");
 			break;
 		case AkatusReaderListener.READER_DISCONNECTED:
 			// Alert the user to connect the reader
-			txtReaderStatus.setText("DISCONNECTED");
+			lblReaderStatus.setText("DISCONNECTED");
 			break;
 		}
 			}
@@ -180,7 +191,7 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 		try {
 			transaction = new TransactionRequest(this);
 			
-			transaction.setAmount("100.0");
+			transaction.setAmount("20.0");
 
 
 			transaction.setCard_number("5899703016106199");
@@ -190,13 +201,6 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 			transaction.setGeolocation(new double[]{1234,1234});
 			transaction.setHolder_name("CLIENT");
 			transaction.setToken(new AuthResponse().getToken());
-
-			//Installments
-			String email = ((EditText)findViewById(R.id.txt_login)).getText().toString();
-			String apiKey = user.getApi_key();
-			double value = Double.parseDouble(transaction.getAmount());			
-			InstallmentsResponse.ParcelaInfo[] resp = new AkatusInstallmentTemplate(true).getInstallmentsList(email, apiKey, value);
-			transaction.setInstallments(resp[0].getQuantidade()+"");
 
 			InputStream sig_is = getResources().openRawResource(R.raw.assinatura);
 			byte[] sig = new byte[sig_is.available()];
@@ -215,29 +219,57 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 			p.setPhone("11987654321");
 			transaction.setPayer(p);
 			
-			((TextView)findViewById(R.id.lblTransacao)).setText("Transaction: "+transaction.toString());
+			lblTransaction.setText("Transaction: "+transaction.toString());
 		} catch (Exception e) {
-			e.printStackTrace();
+			showToast(e.toString());
 		}
+	}
+	
+	void showInstallmentsDialog() throws Exception{
+		String email = txtLogin.getText().toString();
+		String apiKey = user.getApi_key();
+		double value = Double.parseDouble(transaction.getAmount());			
+
+		final ParcelaInfo[] resp = new AkatusInstallmentTemplate(true).getInstallmentsList(email, apiKey, value);
+		String[] parcelasLabels = new String[resp.length];
+		for(int i = 0; i < resp.length; i++){
+			parcelasLabels[i] = resp[i].getQuantidade() + " X " + resp[i].getValor();
+		}
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setItems(parcelasLabels, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int position) {
+				transaction.setInstallments(resp[position].getQuantidade()+"");
+				dialog.dismiss();
+				lblTransaction.setText("Transaction: "+transaction.toString());
+			}
+		});
+		builder.create().show();
 	}
 	
 	private void sendAkatusTransaction(){
 		try {	
 			if(transaction == null){
-				Toast.makeText(this, "Efetue o login", Toast.LENGTH_SHORT).show();
+				showToast("Efetue o login");
 				return;
 			}
 			AkatusTransactionTemplate ws = new AkatusTransactionTemplate(true);
 			TransactionResponse response = ws.postTransaction(transaction);
 			
 			if(response.getReturn_code() == AkatusTransactionTemplate.TRANSACTION_OK)
-				Toast.makeText(this, "Transaction accepted! "+response.getMessage(), Toast.LENGTH_SHORT).show();
+				showToast("Transaction accepted! "+response.getMessage());
 			else
-				Toast.makeText(this, "Transaction recused! "+response.getMessage(), Toast.LENGTH_SHORT).show();
+				showToast("Transaction recused! "+response.getMessage());
 		} catch (TransactionInvalidException e) {
-			Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+			showToast(e.toString());
 		} catch (Exception e) {
-			Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+			showToast(e.toString());
 		}
+	}
+	
+	private void showToast(String message){
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
 }
