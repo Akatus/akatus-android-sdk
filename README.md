@@ -154,7 +154,53 @@ try {
 - **void finalizeReader():** Encerra todos os processos relacionados ao leitor (banco de dados, perfis, evento de leitura). Deve ser chamado ao deixar a Activity (onDestroy).
 
 
-### II – Enviando Transações para a o servidor Akatus:
+### II – Efetuando Login:
+
+Para enviar uma transação é necessário ter um token de autenticação, para isso, efetue o login da seguinte maneira:
+- Adicione [gson-2.1.jar] (http://www.java2s.com/Code/JarDownload/gson/gson-2.1.jar.zip) e [httpmime-4.1.3.jar] (http://www.java2s.com/Code/JarDownload/httpmime/httpmime-4.1.3.jar.zip) (ou equivalentes) ao seu projeto;
+- Instancie e preencha um objeto 'AuthRequest'
+- Instancie um objeto **AkatusAuthTemplate** e envie pelo método **login**, conforme o exemplo:
+
+```java
+	String email = "user@mail.com";
+	String senha = "abcd1234";
+	double geoloc = new double[]{1234,1234}; //lat, long
+	
+	AuthRequest req = new AuthRequest(email,senha,null,geoloc); //3º parametro: token, pode substituir usuario e senha
+	
+	user = new AkatusAuthTemplate(true).login(req); 
+	//parametro 'debug' no construtor, para efetuar a requisição no servidor de testes
+	
+	if(user != null && user.getReturn_code() == 0 && user.getToken() != null && user.getToken().trim().length() > 0){
+		Toast.makeText(this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
+	}else{
+		Toast.makeText(this, "Login e/ou senha inválidos", Toast.LENGTH_SHORT).show();
+	}
+
+```
+### III – Consultando parcelas:
+
+A Akatus disponibiliza um serviço na web para a consulta dos valores das parcelas com juros, com base na api_key do cliente. Para isso efetue os seguintes passos:
+- Adicione [gson-2.1.jar] (http://www.java2s.com/Code/JarDownload/gson/gson-2.1.jar.zip) e [httpmime-4.1.3.jar] (http://www.java2s.com/Code/JarDownload/httpmime/httpmime-4.1.3.jar.zip) (ou equivalentes) ao seu projeto;
+- Instancie um objeto 'AkatusInstallmentTemplate';
+- Recupere um array de objetos 'ParcelaInfo' através do método **getInstallmentsList(email, apiKey, value)** conforme o exemplo:
+
+```java
+
+	String email = "user@mail.com";
+	String apiKey = user.getApi_key();
+	double value = Double.parseDouble(transaction.getAmount());			
+
+
+	ParcelaInfo[] installments = new AkatusInstallmentTemplate(true).getInstallmentsList(email, apiKey, value);
+	for(ParcelaInfo p : installments){
+		//Preencha uma lista na tela
+	}
+
+```
+
+
+### IV – Enviando Transações para a o servidor Akatus:
 
 Para começar a enviar transações para o servidor Akatus, são necessários os seguintes passos:
 
@@ -165,29 +211,35 @@ Para começar a enviar transações para o servidor Akatus, são necessários os
 
 ```java
 private void sendAkatusTransaction(){
-    TransactionRequest request = new TransactionRequest();
+    TransactionRequest transaction = new TransactionRequest();
 
-    request.setAmount("100.0");
-    request.setCard_number("1234567891234567");
-    request.setCvv("123");
-    request.setDescription("ITEM1");
-    request.setExpiration("201309"); // yyyyMM
-    request.setGeolocation(new double[]{1234,1234}); // lat, longt
-    request.setHolder_name("CLIENT");
-    request.setInstallments("10"); // min: 1, max: 12
-    request.setPhoto(photoByteArray);
-    request.setSignature(signatureByteArray);
-    request.setToken(authResponse.getToken());
-    request.setTrack1(cardDataByteArray);
+    transaction.setAmount("20.0");
+    transaction.setDescription("ITEM1");
+    transaction.setExpiration("201309"); // yyyyMM
+    transaction.setGeolocation(new double[]{1234,1234}); // lat, longt
+    transaction.setInstallments("10"); // min: 1, max: 12, valor min de parcela R$ 5,00
+    transaction.setPhoto(photoByteArray);
+    transaction.setSignature(signatureByteArray);
+    transaction.setToken(user.getToken());
+    
+    //Dados manuais
+    transaction.setHolder_name("CLIENT TEST");
+    transaction.setCard_number("1234567891234567");
+    transaction.setCvv("123");
+    
+    //Dados por leitor
+    //transaction.setTrack1(cardDataByteArray);
 
     try {
-        AkatusTransactionTemplate transaction = new AkatusTransactionTemplate(true);
-        TransactionResponse response = transaction.postTransaction(request);
+    	AkatusTransactionTemplate transactionWS = new AkatusTransactionTemplate(true);
+        //parametro 'debug' no construtor, para efetuar a requisição no servidor de testes
 
+	TransactionResponse response = transactionWS.postTransaction(transaction);
         if(response.getReturn_code() == AkatusTransactionTemplate.TRANSACTION_OK)
             Toast.makeText(this, "Transaction accepted! " + response.getMessage(), Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, "Transaction recused! " + response.getMessage(), Toast.LENGTH_SHORT).show();
+
     } catch (Exception e) {
         Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
     }
