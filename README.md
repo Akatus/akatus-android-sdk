@@ -157,6 +157,8 @@ try {
 ### II – Efetuando Login:
 
 Para enviar uma transação é necessário ter um token de autenticação, para isso, efetue o login da seguinte maneira:
+
+- Adicione **AkatusLib.jar** ao seu projeto; (Incluso neste repósitório);
 - Adicione [gson-2.1.jar] (http://www.java2s.com/Code/JarDownload/gson/gson-2.1.jar.zip) e [httpmime-4.1.3.jar] (http://www.java2s.com/Code/JarDownload/httpmime/httpmime-4.1.3.jar.zip) (ou equivalentes) ao seu projeto;
 - Instancie e preencha um objeto 'AuthRequest'
 - Instancie um objeto **AkatusAuthTemplate** e envie pelo método **login**, conforme o exemplo:
@@ -181,6 +183,8 @@ Para enviar uma transação é necessário ter um token de autenticação, para 
 ### III – Consultando parcelas:
 
 A Akatus disponibiliza um serviço na web para a consulta dos valores das parcelas com juros, com base na api_key do cliente. Para isso efetue os seguintes passos:
+
+- Adicione **AkatusLib.jar** ao seu projeto; (Incluso neste repósitório);
 - Adicione [gson-2.1.jar] (http://www.java2s.com/Code/JarDownload/gson/gson-2.1.jar.zip) e [httpmime-4.1.3.jar] (http://www.java2s.com/Code/JarDownload/httpmime/httpmime-4.1.3.jar.zip) (ou equivalentes) ao seu projeto;
 - Instancie um objeto 'AkatusInstallmentTemplate';
 - Recupere um array de objetos 'ParcelaInfo' através do método **getInstallmentsList(email, apiKey, value)** conforme o exemplo:
@@ -204,6 +208,7 @@ A Akatus disponibiliza um serviço na web para a consulta dos valores das parcel
 
 Para começar a enviar transações para o servidor Akatus, são necessários os seguintes passos:
 
+- Adicione **AkatusLib.jar** ao seu projeto; (Incluso neste repósitório);
 - Adicione [gson-2.1.jar] (http://www.java2s.com/Code/JarDownload/gson/gson-2.1.jar.zip) e [httpmime-4.1.3.jar] (http://www.java2s.com/Code/JarDownload/httpmime/httpmime-4.1.3.jar.zip) (ou equivalentes) ao seu projeto;
 - Instancie um objeto 'TransactionRequest';
 - Preencha os dados da transação
