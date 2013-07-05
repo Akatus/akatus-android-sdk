@@ -220,7 +220,7 @@ private void sendAkatusTransaction(){
 
     transaction.setAmount("20.0");
     transaction.setDescription("ITEM1");
-    transaction.setExpiration("201309"); // yyyyMM
+    transaction.setExpiration("09/2013"); // MM/yyyy
     transaction.setGeolocation(new double[]{1234,1234}); // lat, longt
     transaction.setInstallments("10"); // min: 1, max: 12, valor min de parcela R$ 5,00
     transaction.setPhoto(photoByteArray);
@@ -238,6 +238,7 @@ private void sendAkatusTransaction(){
     try {
     	AkatusTransactionTemplate transactionWS = new AkatusTransactionTemplate(true);
         //parametro 'debug' no construtor, para efetuar a requisição no servidor de testes
+        //ATENÇÃO: servidor de testes não aceita mais de 1 parcela
 
 	TransactionResponse response = transactionWS.postTransaction(transaction);
         if(response.getReturn_code() == AkatusTransactionTemplate.TRANSACTION_OK)
