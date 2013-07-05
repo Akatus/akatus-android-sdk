@@ -1139,30 +1139,7 @@
   </htc6435lvw>
  </htc>
  <samsung>
-	<GT-S5360B>
-        <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
-	    <directionOutputWave>0</directionOutputWave>
-		<InputFreq>48000</InputFreq>
-		<OutputFreq>48000</OutputFreq>
-		<WaveDirct>1</WaveDirct>
-		<RecBuffSize>0</RecBuffSize>
-		<ReadRecBuffSize>0</ReadRecBuffSize>
-		<_Low>-5000</_Low>
-		<_High>5000</_High>
-		<__Low>-10000</__Low>
-		<__High>10000</__High>
-		<highThreshold>2000</highThreshold>
-		<lowThreshold>-2000</lowThreshold>
-		<device_Apm_Base>25000</device_Apm_Base>
-		<min>2</min>
-		<max>16</max>
-		<baudRate>4800</baudRate>
-		<preAmbleFactor>2</preAmbleFactor>
-		<shuttle_channel>48</shuttle_channel>
-		<useVoiceRecognition>1</useVoiceRecognition>
-		<force_headset_plug>0</force_headset_plug>
-		<volumeLevelAdjust>0</volumeLevelAdjust>
-	</GT-S5360B>     
+
   <sch-I500>
    <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
    <directionOutputWave>1</directionOutputWave>
@@ -2560,6 +2537,56 @@
    <baudRate>9600</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
   </nexus10>
+       <GT-S5360B>
+        <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
+	    <directionOutputWave>0</directionOutputWave>
+		<InputFreq>48000</InputFreq>
+		<OutputFreq>48000</OutputFreq>
+		<WaveDirct>1</WaveDirct>
+		<RecBuffSize>0</RecBuffSize>
+		<ReadRecBuffSize>0</ReadRecBuffSize>
+		<_Low>-5000</_Low>
+		<_High>5000</_High>
+		<__Low>-10000</__Low>
+		<__High>10000</__High>
+		<highThreshold>2000</highThreshold>
+		<lowThreshold>-2000</lowThreshold>
+		<device_Apm_Base>25000</device_Apm_Base>
+		<min>2</min>
+		<max>16</max>
+		<baudRate>4800</baudRate>
+		<preAmbleFactor>2</preAmbleFactor>
+		<shuttle_channel>48</shuttle_channel>
+		<useVoiceRecognition>1</useVoiceRecognition>
+		<force_headset_plug>0</force_headset_plug>
+		<volumeLevelAdjust>0</volumeLevelAdjust>
+	</GT-S5360B>
+       <GT-S7500L>
+        <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
+       	
+       <directionOutputWave>1</directionOutputWave>
+<InputFreq>48000</InputFreq>
+<OutputFreq>48000</OutputFreq>
+<WaveDirct>1</WaveDirct>
+<RecBuffSize>8192</RecBuffSize>
+<ReadRecBuffSize>163840</ReadRecBuffSize>
+<_Low>-5000</_Low>
+<_High>5000</_High>
+<__Low>-10000</__Low>
+<__High>10000</__High>
+<highThreshold>4000</highThreshold>
+<lowThreshold>-4000</lowThreshold>
+<device_Apm_Base>25000</device_Apm_Base>
+<min>2</min>
+<max>8</max>
+<baudRate>9600</baudRate>
+<preAmbleFactor>2</preAmbleFactor>
+<shuttle_channel>48</shuttle_channel>
+<useVoiceRecognition>0</useVoiceRecognition>
+<force_headset_plug>0</force_headset_plug>
+<volumeLevelAdjust>0</volumeLevelAdjust>
+       </GT-S7500L>
+
  </samsung>
  <huawei>
   <huaweimediapad>
@@ -2635,6 +2662,32 @@
   </huaweiu8800-51>
  </huawei>
  <lge>
+     
+     <LG-E405f>
+   <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
+<directionOutputWave>0</directionOutputWave>
+<InputFreq>44100</InputFreq>
+<OutputFreq>48000</OutputFreq>
+<WaveDirct>1</WaveDirct>
+<RecBuffSize>8192</RecBuffSize>
+<ReadRecBuffSize>163840</ReadRecBuffSize>
+<_Low>-5000</_Low>
+<_High>5000</_High>
+<__Low>-10000</__Low>
+<__High>10000</__High>
+<highThreshold>4000</highThreshold>
+<lowThreshold>-4000</lowThreshold>
+<device_Apm_Base>25000</device_Apm_Base>
+<min>2</min>
+<max>8</max>
+<baudRate>9600</baudRate>
+<preAmbleFactor>2</preAmbleFactor>
+<shuttle_channel>48</shuttle_channel>
+<useVoiceRecognition>1</useVoiceRecognition>
+<force_headset_plug>0</force_headset_plug>
+<volumeLevelAdjust>0</volumeLevelAdjust>
+</LG-E405f>
+     
   <lg-p930>
    <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
    <directionOutputWave>1</directionOutputWave>

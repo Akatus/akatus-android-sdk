@@ -191,15 +191,15 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 		try {
 			transaction = new TransactionRequest(this);
 			
-			transaction.setAmount("20.0");
+			transaction.setAmount("100.0");
 
 
-			transaction.setCard_number("5899703016106199");
+			transaction.setCard_number("4012001038443335");
 			transaction.setCvv("123");
 			transaction.setDescription("ITEM1");
-			transaction.setExpiration("201309");
+			transaction.setExpiration("06/2018");
 			transaction.setGeolocation(new double[]{1234,1234});
-			transaction.setHolder_name("CLIENT");
+			transaction.setHolder_name("AUTORIZAR A");
 			transaction.setToken(new AuthResponse().getToken());
 
 			InputStream sig_is = getResources().openRawResource(R.raw.assinatura);
