@@ -233,7 +233,7 @@ private void sendAkatusTransaction(){
     transaction.setCvv("123");
     
     //Dados por leitor
-    //transaction.setTrack1(cardDataByteArray);
+    //transaction.setTrackBytes(cardDataByteArray);
 
     try {
     	AkatusTransactionTemplate transactionWS = new AkatusTransactionTemplate(true);
