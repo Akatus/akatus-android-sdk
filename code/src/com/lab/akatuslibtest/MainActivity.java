@@ -148,7 +148,7 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 
 				    lblReaderStatus.setText(cardNo);
 				    if(transaction != null)
-				    	transaction.setTrack1(dataString);
+				    	transaction.setTrackBytes(data);
 
 				} catch (IndexOutOfBoundsException e) {
 				    // Os dados não foram lidos corretamente, passe o cartão novamente
