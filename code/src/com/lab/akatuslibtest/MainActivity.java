@@ -2,6 +2,7 @@ package com.lab.akatuslibtest;
 
 import java.io.InputStream;
 
+import com.lib.akatus.creditcard.CardValidator;
 import com.lib.akatusmobile.AkatusAuthTemplate;
 import com.lib.akatusmobile.AkatusInstallmentTemplate;
 import com.lib.akatusmobile.AkatusReaderInterface;
@@ -87,7 +88,7 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 					btLogoff.setVisibility(Button.VISIBLE);
 					btInstallments.setVisibility(Button.VISIBLE);
 				}else{
-					showToast("Login e/ou senha inválidos");
+					showToast("Login e/ou senha inválidos "+user.getMessage());
 				}
 			}else if(v == btnSend){
 				sendAkatusTransaction();
@@ -146,13 +147,15 @@ public class MainActivity extends Activity implements AkatusReaderInterface, OnC
 				    String cardNo = dataString.substring(dataString.indexOf(";")+1, dataString.indexOf("="));
 				    // A varíavel cardNo agora representa o numero do cartão mascarado com '*'
 
-				    lblReaderStatus.setText(cardNo);
+				    lblReaderStatus.setText(CardValidator.getIssuer(cardNo.replaceAll("[*]", "0"))+" - " +cardNo);
 				    if(transaction != null)
 				    	transaction.setTrackBytes(data);
 
 				} catch (IndexOutOfBoundsException e) {
 				    // Os dados não foram lidos corretamente, passe o cartão novamente
 					showToast("Passe o cartão novamente");
+				} catch (Exception e) {
+					showToast(e.toString());
 				}
 			}
 		});

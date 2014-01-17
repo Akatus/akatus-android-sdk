@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- uniMag SDK Configuration ver4.0.2 -->
+<!-- uniMag SDK Configuration ver4.0.4 -->
 <IDTECHPRODUCTS>
  <Summary>
   <Version>
    <SDKMajorVersion>4</SDKMajorVersion>
    <SDKMinorVersion>0</SDKMinorVersion>
-   <XMLVersion>2</XMLVersion>
+   <XMLVersion>4</XMLVersion>
   </Version>
   <PhoneList>
    <Moto>motorola</Moto>
@@ -16,11 +16,13 @@
    <acer>acer</acer>
    <lge>lge</lge>
    <dellinc.>dellinc.</dellinc.>
+   <fujitsu>fujitsu</fujitsu>
    <sharp>sharp</sharp>
    <toshiba>toshiba</toshiba>
    <kyocera>kyocera</kyocera>
    <lenovo>lenovo</lenovo>
    <sony>sony</sony>
+   <sonyericsson>sonyericsson</sonyericsson>
    <pantech>pantech</pantech>
   </PhoneList>
   <MessageDegist>
@@ -653,7 +655,7 @@
    <preAmbleFactor>2</preAmbleFactor>
   </ADR6325>
   <ADR6400L>
-   <support_status val="um2=m;um2i=m;shuttle=m"> </support_status>
+   <support_status val="um2=s;um2i=s;shuttle=s"> </support_status>
    <InputFreq>48000</InputFreq>
    <OutputFreq>48000</OutputFreq>
    <WaveDirct>0</WaveDirct>
@@ -1139,7 +1141,6 @@
   </htc6435lvw>
  </htc>
  <samsung>
-
   <sch-I500>
    <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
    <directionOutputWave>1</directionOutputWave>
@@ -2664,28 +2665,25 @@
  <lge>
      
      <LG-E405f>
-   <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
-<directionOutputWave>0</directionOutputWave>
-<InputFreq>44100</InputFreq>
-<OutputFreq>48000</OutputFreq>
-<WaveDirct>1</WaveDirct>
-<RecBuffSize>8192</RecBuffSize>
-<ReadRecBuffSize>163840</ReadRecBuffSize>
-<_Low>-5000</_Low>
-<_High>5000</_High>
-<__Low>-10000</__Low>
-<__High>10000</__High>
-<highThreshold>4000</highThreshold>
-<lowThreshold>-4000</lowThreshold>
-<device_Apm_Base>25000</device_Apm_Base>
-<min>2</min>
-<max>8</max>
-<baudRate>9600</baudRate>
-<preAmbleFactor>2</preAmbleFactor>
-<shuttle_channel>48</shuttle_channel>
-<useVoiceRecognition>1</useVoiceRecognition>
-<force_headset_plug>0</force_headset_plug>
-<volumeLevelAdjust>0</volumeLevelAdjust>
+      <support_status val=""> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>44100</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <RecBuffSize>8192</RecBuffSize>
+   <ReadRecBuffSize>163840</ReadRecBuffSize>
+   <WaveDirct>0</WaveDirct>
+   <_Low>-10000</_Low>
+   <_High>10000</_High>
+   <__Low>-5000</__Low>
+   <__High>5000</__High>
+   <highThreshold>4000</highThreshold>
+   <lowThreshold>-4000</lowThreshold>
+   <device_Apm_Base>30000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+
 </LG-E405f>
      
   <lg-p930>
@@ -2964,6 +2962,24 @@
    <baudRate>2400</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
   </vs9304g>
+  <vs8404g>
+   <support_status val="um2=s;um2i=s;shuttle=s"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>16000</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-3000</_Low>
+   <_High>3000</_High>
+   <__Low>-2000</__Low>
+   <__High>2000</__High>
+   <highThreshold>1000</highThreshold>
+   <lowThreshold>-1000</lowThreshold>
+   <device_Apm_Base>12000</device_Apm_Base>
+   <min>2</min>
+   <max>11</max>
+   <baudRate>2400</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+  </vs8404g>
   <nexus4>
    <support_status val="um2=s;um2i=s;shuttle=s"> </support_status>
    <directionOutputWave>1</directionOutputWave>
@@ -3174,6 +3190,24 @@
    <baudRate>9600</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
   </m9300>
+  <torque>
+   <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>48000</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-5000</_Low>
+   <_High>5000</_High>
+   <__Low>-10000</__Low>
+   <__High>10000</__High>
+   <highThreshold>15000</highThreshold>
+   <lowThreshold>-15000</lowThreshold>
+   <device_Apm_Base>25000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+  </torque>
  </kyocera>
  <lenovo>
   <thinkpadtablet>
@@ -3214,7 +3248,7 @@
    <baudRate>9600</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
   </lt30at>
- </sony> 
+ </sony>
  <pantech>
   <pantechp8000>
    <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
@@ -3253,6 +3287,26 @@
   </phone>
  </special_model_number>
  <voice-recognition>
+ <prefix_vr_fujitsu>
+  <f-05e>
+   <support_status val="ump=m"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>48000</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-5000</_Low>
+   <_High>5000</_High>
+   <__Low>-10000</__Low>
+   <__High>10000</__High>
+   <highThreshold>4000</highThreshold>
+   <lowThreshold>-4000</lowThreshold>
+   <device_Apm_Base>25000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+  </f-05e>
+ </prefix_vr_fujitsu>
  <prefix_vr_kyocera>
   <m9300>
    <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
@@ -3454,6 +3508,7 @@
    <max>8</max>
    <baudRate>9600</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
+   <powerupLastBeforeCMD>500</powerupLastBeforeCMD>
   </adr6410lvw>
   <htcpm63100>
    <support_status val="um2=s;um2i=s;shuttle=s"> </support_status>
@@ -3560,6 +3615,24 @@
    <preAmbleFactor>2</preAmbleFactor>
    <powerupLastBeforeCMD>800</powerupLastBeforeCMD>
   </htcone>
+  <ph44100>
+   <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
+   <directionOutputWave>0</directionOutputWave>
+   <InputFreq>48000</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <WaveDirct>0</WaveDirct>
+   <_Low>-5000</_Low>
+   <_High>5000</_High>
+   <__Low>-10000</__Low>
+   <__High>10000</__High>
+   <highThreshold>4000</highThreshold>
+   <lowThreshold>-4000</lowThreshold>
+   <device_Apm_Base>25000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+  </ph44100>
  </prefix_vr_htc>
  <prefix_vr_samsung>
   <sch-i535>
@@ -3582,7 +3655,70 @@
    <baudRate>9600</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
    <powerupLastBeforeCMD>1000</powerupLastBeforeCMD>
-  </sch-i535>  
+  </sch-i535>
+  <sch-r530u>
+   <support_status val="um2g=s;ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>48000</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <RecBuffSize>8192</RecBuffSize>
+   <ReadRecBuffSize>163840</ReadRecBuffSize>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-10000</_Low>
+   <_High>10000</_High>
+   <__Low>-5000</__Low>
+   <__High>5000</__High>
+   <highThreshold>8000</highThreshold>
+   <lowThreshold>-8000</lowThreshold>
+   <device_Apm_Base>15000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+   <powerupLastBeforeCMD>1000</powerupLastBeforeCMD>
+  </sch-r530u>
+  <sch-r530c>
+   <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>48000</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <RecBuffSize>8192</RecBuffSize>
+   <ReadRecBuffSize>163840</ReadRecBuffSize>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-10000</_Low>
+   <_High>10000</_High>
+   <__Low>-5000</__Low>
+   <__High>5000</__High>
+   <highThreshold>8000</highThreshold>
+   <lowThreshold>-8000</lowThreshold>
+   <device_Apm_Base>15000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+   <powerupLastBeforeCMD>1000</powerupLastBeforeCMD>
+  </sch-r530c>
+  <sch-r530m>
+   <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>48000</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <RecBuffSize>8192</RecBuffSize>
+   <ReadRecBuffSize>163840</ReadRecBuffSize>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-10000</_Low>
+   <_High>10000</_High>
+   <__Low>-5000</__Low>
+   <__High>5000</__High>
+   <highThreshold>8000</highThreshold>
+   <lowThreshold>-8000</lowThreshold>
+   <device_Apm_Base>15000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+   <powerupLastBeforeCMD>1000</powerupLastBeforeCMD>
+  </sch-r530m>
   <sgh-t999>
    <support_status val="um2g=s;ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
    <directionOutputWave>1</directionOutputWave>
@@ -3604,6 +3740,25 @@
    <preAmbleFactor>2</preAmbleFactor>
    <powerupLastBeforeCMD>1000</powerupLastBeforeCMD>
   </sgh-t999>
+  <sgh-t999l>
+   <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>48000</InputFreq>
+   <OutputFreq>24000</OutputFreq>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-5000</_Low>
+   <_High>5000</_High>
+   <__Low>-10000</__Low>
+   <__High>10000</__High>
+   <highThreshold>4000</highThreshold>
+   <lowThreshold>-4000</lowThreshold>
+   <device_Apm_Base>25000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+   <powerupLastBeforeCMD>500</powerupLastBeforeCMD>
+  </sgh-t999l>
   <sph-m820-bst>
    <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
    <directionOutputWave>1</directionOutputWave>
@@ -3696,6 +3851,24 @@
    <baudRate>9600</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
   </gt-p5113>
+  <gt-p5110>
+   <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>44100</InputFreq>
+   <OutputFreq>24000</OutputFreq>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-10000</_Low>
+   <_High>10000</_High>
+   <__Low>-5000</__Low>
+   <__High>5000</__High>
+   <highThreshold>15000</highThreshold>
+   <lowThreshold>-15000</lowThreshold>
+   <device_Apm_Base>25000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+  </gt-p5110>
   <gt-s5830>
    <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
    <directionOutputWave>1</directionOutputWave>
@@ -4009,7 +4182,7 @@
    <preAmbleFactor>2</preAmbleFactor>
   </sch-i605>
   <sph-l900>
-   <support_status val="um2=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
+   <support_status val="um2g=s;ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
    <directionOutputWave>1</directionOutputWave>
    <InputFreq>44100</InputFreq>
    <OutputFreq>48000</OutputFreq>
@@ -4138,6 +4311,24 @@
    <baudRate>9600</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
   </samsung-sgh-i317>
+  <sch-r950>   
+   <support_status val="um2g=s;ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>48000</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <WaveDirct>0</WaveDirct>
+   <_Low>-5000</_Low>
+   <_High>5000</_High>
+   <__Low>-10000</__Low>
+   <__High>10000</__High>
+   <highThreshold>15000</highThreshold>
+   <lowThreshold>-15000</lowThreshold>
+   <device_Apm_Base>25000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+  </sch-r950>
   <gt-p3110>
    <support_status val="um2g=m;ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
    <directionOutputWave>1</directionOutputWave>
@@ -4218,7 +4409,7 @@
    <volumeLevelAdjust>2</volumeLevelAdjust>
    <powerupLastBeforeCMD>500</powerupLastBeforeCMD>
   </sgh-t779>
-  <sgh-i494>
+  <sgh-i497>
    <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
    <directionOutputWave>1</directionOutputWave>
    <InputFreq>48000</InputFreq>
@@ -4237,7 +4428,7 @@
    <preAmbleFactor>2</preAmbleFactor>
    <volumeLevelAdjust>2</volumeLevelAdjust>
    <powerupLastBeforeCMD>500</powerupLastBeforeCMD>
-  </sgh-i494>
+  </sgh-i497>
   <sch-i925>
    <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
    <directionOutputWave>1</directionOutputWave>
@@ -4255,7 +4446,6 @@
    <max>8</max>
    <baudRate>9600</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
-   <volumeLevelAdjust>2</volumeLevelAdjust>
    <powerupLastBeforeCMD>500</powerupLastBeforeCMD>
   </sch-i925>
   <sch-i925u>
@@ -4275,7 +4465,6 @@
    <max>8</max>
    <baudRate>9600</baudRate>
    <preAmbleFactor>2</preAmbleFactor>
-   <volumeLevelAdjust>2</volumeLevelAdjust>
    <powerupLastBeforeCMD>500</powerupLastBeforeCMD>
   </sch-i925u>
   <sph-p500>
@@ -4396,7 +4585,7 @@
    <powerupLastBeforeCMD>500</powerupLastBeforeCMD>
   </samsung-sgh-i337>
   <sph-l720>
-   <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
+   <support_status val="um2g=s;ump=s;um2=m;um2i=s;shuttle=s"> </support_status>
    <directionOutputWave>1</directionOutputWave>
    <InputFreq>48000</InputFreq>
    <OutputFreq>48000</OutputFreq>
@@ -4509,7 +4698,45 @@
    <preAmbleFactor>2</preAmbleFactor>
    <powerupLastBeforeCMD>500</powerupLastBeforeCMD>
   </gt-i9505>
+  <sph-d710bst>
+   <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>32000</InputFreq>
+   <OutputFreq>24000</OutputFreq>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-5000</_Low>
+   <_High>5000</_High>
+   <__Low>-10000</__Low>
+   <__High>10000</__High>
+   <highThreshold>4000</highThreshold>
+   <lowThreshold>-4000</lowThreshold>
+   <device_Apm_Base>25000</device_Apm_Base>
+   <min>1</min>
+   <max>5</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+  </sph-d710bst>
  </prefix_vr_samsung>
+ <prefix_vr_sonyericsson>
+  <lt26ii>
+   <support_status val="um2g=m;ump=m;um2=m;um2i=m;shuttle=m"> </support_status>
+   <directionOutputWave>1</directionOutputWave>
+   <InputFreq>48000</InputFreq>
+   <OutputFreq>48000</OutputFreq>
+   <WaveDirct>1</WaveDirct>
+   <_Low>-5000</_Low>
+   <_High>5000</_High>
+   <__Low>-10000</__Low>
+   <__High>10000</__High>
+   <highThreshold>10000</highThreshold>
+   <lowThreshold>-10000</lowThreshold>
+   <device_Apm_Base>25000</device_Apm_Base>
+   <min>2</min>
+   <max>8</max>
+   <baudRate>9600</baudRate>
+   <preAmbleFactor>2</preAmbleFactor>
+  </lt26ii>
+ </prefix_vr_sonyericsson>
  <prefix_vr_huawei>
   <t-mobilemytouchq>
    <support_status val="ump=s;um2=s;um2i=s;shuttle=s"> </support_status>
@@ -4552,7 +4779,7 @@
    <force_headset_plug>1</force_headset_plug>
   </lg-p925> 
   <vs9204g>
-   <support_status val="um2=s;um2i=s;shuttle=s"> </support_status>
+   <support_status val="um2=m;um2i=m;shuttle=m"> </support_status>
    <directionOutputWave>1</directionOutputWave>
    <InputFreq>32000</InputFreq>
    <OutputFreq>48000</OutputFreq>
